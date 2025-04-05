@@ -1,0 +1,19 @@
+{
+  "Project": {
+    "Name": "Microgrid_Example",
+    "SimulationType": "TimeSeries", 
+    "TimeSteps": "15min",        
+    "StartTime": "2023-01-01 00:00:00",
+    "EndTime": "2023-01-01 24:00:00",
+    "Scenarios": ["Default"]
+  },
+  "Exports": {
+    "Logging": {
+      "ExportLogs": true
+    },
+    "Reports": {
+      "ExportVoltages": true,
+      "ExportCurrents": true
+    }
+  }
+}
