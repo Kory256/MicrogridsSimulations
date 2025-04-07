@@ -26,10 +26,13 @@ dependencies:
   - gxx_impl_linux-64=14.2.0=h2ead766_2
   - gxx_linux-64=14.2.0=h9423afd_8
   - icu=73.1=h6a678d5_0
+  - importlib_resources=6.5.2=pyhd8ed1ab_0
   - intel-openmp=2023.1.0=hdb19cb5_46306
   - ipykernel=6.29.5=pyh3099207_0
   - ipython=8.18.1=pyh707e725_3
   - jedi=0.19.2=pyhd8ed1ab_1
+  - jsonschema=4.23.0=pyhd8ed1ab_1
+  - jsonschema-specifications=2024.10.1=pyhd8ed1ab_1
   - jupyter_client=7.3.4=pyhd8ed1ab_0
   - jupyter_core=5.7.2=pyh31011fe_1
   - kernel-headers_linux-64=3.10.0=he073ed8_18
@@ -51,6 +54,7 @@ dependencies:
   - mkl-service=2.4.0=py39h5eee18b_2
   - mkl_fft=1.3.11=py39h5eee18b_0
   - mkl_random=1.2.8=py39h1128e8f_0
+  - nbformat=5.10.4=pyhd8ed1ab_1
   - ncurses=6.4=h6a678d5_0
   - nest-asyncio=1.6.0=pyhd8ed1ab_1
   - numpy=2.0.1=py39h5f9d8c6_1
@@ -61,6 +65,7 @@ dependencies:
   - pexpect=4.9.0=pyhd8ed1ab_1
   - pickleshare=0.7.5=pyhd8ed1ab_1004
   - pip=25.0=py39h06a4308_0
+  - pkgutil-resolve-name=1.3.10=pyhd8ed1ab_2
   - platformdirs=4.3.7=pyh29332c3_0
   - plotly=5.24.1=py39h2f386ee_1
   - prompt-toolkit=3.0.50=pyha770c72_0
@@ -70,9 +75,12 @@ dependencies:
   - py-boost=1.82.0=py39h3c18c91_2
   - pygments=2.19.1=pyhd8ed1ab_0
   - python=3.9.21=he870216_1
+  - python-fastjsonschema=2.21.1=pyhd8ed1ab_0
   - python_abi=3.9=2_cp39
   - pyzmq=26.2.0=py39h6a678d5_0
   - readline=8.2=h5eee18b_0
+  - referencing=0.36.2=pyh29332c3_0
+  - rpds-py=0.24.0=py39h3506688_0
   - setuptools=75.8.0=py39h06a4308_0
   - shapely=2.0.6=py39h6f81d3c_0
   - sqlite=3.45.3=h5eee18b_0
@@ -114,7 +122,6 @@ dependencies:
       - h5py==3.13.0
       - helics==3.6.1
       - idna==3.10
-      - importlib-resources==6.5.2
       - ipywidgets==8.1.5
       - joblib==1.4.2
       - jupyterlab-widgets==3.0.13
