@@ -3,13 +3,13 @@
     "Name": "Default",
     "Controllers": {
       "PVSystem.Solar": {
-        "inverter_type": "grid_following",  // Default mode
+        "inverter_type": "grid_following",
         "pf_priority": false,
-        "volt_var": true   // Enable volt-var control
+        "volt_var": true 
       },
       "Generator.Wind": {
         "inverter_type": "grid_following",
-        "freq_watt": true  // Enable freq-watt control
+        "freq_watt": true 
       }
     }
   }

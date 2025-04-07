@@ -1,0 +1,81 @@
+// microgrid_example/Microgrid.dss
+
+// Define buses
+// New Bus.MG1    kV=12.47  phases=3
+// New Bus.MG2    kV=0.48   phases=3
+
+// Define circuit
+New Circuit.Microgrid 
+    basekv=12.47 
+    phases=3 
+    bus1=MG1 
+    bus2=MG2
+
+// Connect buses via a transformer
+New Transformer.MG_XFMR 
+    buses=(MG1, MG2) 
+    conns=(Delta, Wye) 
+    kVs=(12.47, 0.48) 
+    kVAs=500 
+    %R=0.5
+
+// Add a load (50 kW + 20 kVAR)
+New Load.MG_Load 
+    bus=MG2 
+    phases=3 
+    kV=0.48 
+    kW=50 
+    kvar=20
+
+// // Add a solar PV system
+// New PVSystem.Solar 
+//     bus=MG2 
+//     phases=3 
+//     kV=0.48 
+//     kVA=100 
+//     Pmpp=80 
+//     %Cutin=0.1 
+//     %Cutout=0.1 
+    
+// // Add a grid-following inverter for the solar PV system
+// New InvControl.InvSolar
+//     DERList=(Solar)  
+//     Mode=VOLTWATT   // Grid-following control mode
+
+// // Add a battery storage system (grid-forming inverter)
+// New Storage.Battery 
+//     bus=MG2 
+//     phases=3 
+//     kV=0.48 
+//     kWh=200 
+//     kW=100 
+//     %SOC=0.5
+// New InvControl.InvBattery DERList=(Battery) Mode=VOLTVAR
+
+// // Add a microgrid controller
+// // New MicrogridController.MG_Controller 
+// //     bus=MG2 
+// //     phases=3 
+// //     kV=0.48 
+// //     kW=100 
+// //     %SOC=0.5
+// // New InvControl.InvController DERList=(controller) Mode=VOLTWATT
+
+// // Add a wind turbine (grid-following inverter)
+// New Generator.Wind 
+//     bus=MG2 
+//     phases=3 
+//     kV=0.48 
+//     kVA=50 
+// // grid following inverter for wind system
+// New InvControl.InvWind
+//     DERList=(Wind)  
+//     Mode=VOLTWATT   // Grid-following control mode
+
+// Add a backup diesel generator (synchronous machine)
+New Generator.Diesel 
+    bus=MG1 
+    phases=3 
+    kV=12.47 
+    kVA=200 
+    model=1  

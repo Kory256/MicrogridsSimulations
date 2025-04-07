@@ -1,2 +1,5 @@
 RenewablesIntegrationFinalProject/PyDSSvenv/
 RenewablesIntegrationFinalProject/__pycache__/
+*.csv
+*.h5
+RenewablesIntegrationFinalProject_miniconda/pydss-projects/HELICS/

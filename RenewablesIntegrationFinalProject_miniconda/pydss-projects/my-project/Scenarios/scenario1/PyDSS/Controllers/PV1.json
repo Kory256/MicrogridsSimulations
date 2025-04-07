@@ -1,0 +1,11 @@
+{
+    "ControllerType": "PvController",
+    "PvSystem": "Solar",
+    "Enabled": true,
+    "ControlMode": "GFL",
+    "VRef": 1.0,
+    "Pref": 80.0,
+    "Qref": 0.0,
+    "Frequency": 60.0
+  }
+  

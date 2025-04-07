@@ -1,0 +1,20 @@
+{
+    "Controllers": [
+      {
+        "Name": "Solar",
+        "ControllerFile": "PV1.json",
+        "Element": "PVSystem.Solar"
+      },
+      {
+        "Name": "Wind",
+        "ControllerFile": "Wind.json",
+        "Element": "Generator.Wind"
+      },
+      {
+        "Name": "Diesel",
+        "ControllerFile": "Diesel.json",
+        "Element": "Generator.Diesel"
+      }
+    ]
+  }
+  

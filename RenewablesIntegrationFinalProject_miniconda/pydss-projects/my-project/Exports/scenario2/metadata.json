@@ -1,0 +1,24 @@
+{
+    "event_log": "Exports/scenario2/event_log.csv",
+    "element_info_files": [
+        "Exports/scenario2/CapacitorsInfo.csv",
+        "Exports/scenario2/FusesInfo.csv",
+        "Exports/scenario2/GeneratorsInfo.csv",
+        "Exports/scenario2/IsourceInfo.csv",
+        "Exports/scenario2/LinesInfo.csv",
+        "Exports/scenario2/LoadsInfo.csv",
+        "Exports/scenario2/MonitorsInfo.csv",
+        "Exports/scenario2/PVSystemsInfo.csv",
+        "Exports/scenario2/ReclosersInfo.csv",
+        "Exports/scenario2/RegControlsInfo.csv",
+        "Exports/scenario2/RelaysInfo.csv",
+        "Exports/scenario2/SensorsInfo.csv",
+        "Exports/scenario2/TransformersInfo.csv",
+        "Exports/scenario2/VsourcesInfo.csv",
+        "Exports/scenario2/XYCurvesInfo.csv",
+        "Exports/scenario2/TransformersPhaseInfo.csv"
+    ],
+    "feeder_head_info_files": [
+        "Exports/scenario2/FeederHeadInfo.json"
+    ]
+}

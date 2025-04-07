@@ -1,11 +1,11 @@
-from PyDSS import PyDSS
+from pydss import dss as pyDSS
 import os
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 SCENARIO = "default"
 
 def run_simulation():
-    pydss = PyDSS(
+    pydss = pyDSS(
         project_path=os.path.join(PROJECT_DIR, "project.json"),
         scenario=SCENARIO
     )

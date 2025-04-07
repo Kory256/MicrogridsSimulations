@@ -1,0 +1,9 @@
+{
+    "ControllerType": "GeneratorController",
+    "Generator": "Diesel",
+    "Enabled": true,
+    "ControlMode": "VoltageSource",
+    "VRef": 1.0,
+    "Frequency": 60.0
+  }
+  

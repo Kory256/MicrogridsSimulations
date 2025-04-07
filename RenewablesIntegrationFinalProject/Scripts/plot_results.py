@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from PyDSS import PyDSS
+from pydss import PyDSS
 
 def plot_voltages():
     pydss = PyDSS("project.json", "default")
