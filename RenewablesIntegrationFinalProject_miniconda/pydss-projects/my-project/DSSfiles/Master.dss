@@ -4,44 +4,44 @@
 // New Bus.MG1    kV=12.47  phases=3
 // New Bus.MG2    kV=0.48   phases=3
 
+Clear
+
+Set DefaultBaseFrequency=60
+
 // Define circuit
 New Circuit.Microgrid 
-    basekv=12.47 
+    basekv=0.24
+
+
+! define new load
+new load.load1 bus1=loadbus1 phases=3 kv=0.24 kw=100 pf=0.88 model=1 class=1
+
+! define load shapes from csv
+new loadshape.irrad Npts= 288 mInterval= 5
+    mult = (file=./irradiance_data_2020-03-10.csv, col=2, header=no)
+    action=normalize
+! Add a solar PV system
+New PVSystem.Solar 
+    bus1=MGSolar 
     phases=3 
-    bus1=MG1 
-    bus2=MG2
+    kV=0.03 
+    kVA=100 
+    irradiance=1005
+    Pmpp=60 
+    %Cutin=0.1 
+    %Cutout=0.1 
 
-// Connect buses via a transformer
-New Transformer.MG_XFMR 
-    buses=(MG1, MG2) 
-    conns=(Delta, Wye) 
-    kVs=(12.47, 0.48) 
-    kVAs=500 
-    %R=0.5
-
-// Add a load (50 kW + 20 kVAR)
-New Load.MG_Load 
-    bus=MG2 
+! backup generator
+New Generator.Diesel 
+    bus=MGBackup 
     phases=3 
-    kV=0.48 
-    kW=50 
-    kvar=20
+    kV=0.24 
+    kVA=200 
+    model=1  
 
-// // Add a solar PV system
-// New PVSystem.Solar 
-//     bus=MG2 
-//     phases=3 
-//     kV=0.48 
-//     kVA=100 
-//     Pmpp=80 
-//     %Cutin=0.1 
-//     %Cutout=0.1 
+! define new line
+new line.line1 bus1=loadbus1 bus2=MGSolar linecode=336matrix length=10
     
-// // Add a grid-following inverter for the solar PV system
-// New InvControl.InvSolar
-//     DERList=(Solar)  
-//     Mode=VOLTWATT   // Grid-following control mode
-
 // // Add a battery storage system (grid-forming inverter)
 // New Storage.Battery 
 //     bus=MG2 
@@ -73,9 +73,4 @@ New Load.MG_Load
 //     Mode=VOLTWATT   // Grid-following control mode
 
 // Add a backup diesel generator (synchronous machine)
-New Generator.Diesel 
-    bus=MG1 
-    phases=3 
-    kV=12.47 
-    kVA=200 
-    model=1  
+
