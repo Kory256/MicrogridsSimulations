@@ -9,12 +9,12 @@ step_resolution_sec = 900.0
 loadshape_start_time = "2020-03-11T00:00:00"
 simulation_type = "qsts"
 control_mode = "Static"
-max_control_iterations = 50
+max_control_iterations = 100
 convergence_error_percent_threshold = 0.0
-error_tolerance = 0.001
+error_tolerance = 0.09
 max_error_tolerance = 0.0
 skip_export_on_convergence_error = true
-dss_file = "Master.dss"
+dss_file = "NoWorkuy.dss"
 dss_file_absolute_path = false
 disable_pydss_controllers = false
 use_controller_registry = false
@@ -88,7 +88,7 @@ profile_mapping = ""
 is_relative_path = true
 
 [reports]
-format = "h5"
+format = "csv"
 granularity = "per_element_per_time_point"
 types = []
 

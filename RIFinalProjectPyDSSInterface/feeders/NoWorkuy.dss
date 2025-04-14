@@ -1,0 +1,119 @@
+Clear
+
+Set DefaultBaseFrequency=60
+
+// Define circuit
+New Circuit.Microgrid 
+    basekv=0.24
+    phases=3
+    bus1=MGbackup
+
+! Define voltage source
+New Vsource.MySource bus1=MGBackup phases=3 pu=1.0 basekv=0.24 angle=0 frequency=60
+
+! Loadshape for the load
+New loadshape.load1shape npts=24 interval=1
+~ mult=(0.5 0.6 0.7 0.8 0.9 1.0 1.2 1.5 1.8 2.0 2.2 2.5 2.5 2.2 2.0 1.8 1.5 1.2 1.0 0.8 0.7 0.6 0.5 0.4)
+
+! define new load
+new load.load1 bus1=loadbus1 phases=3 kv=0.24 kVA=100 pf=1 model=1 class=1 daily=load1shape
+
+! define irradiance shapes from csv
+new loadshape.irrad Npts= 288 mInterval= 5
+    mult = (file=irradiance_data_2020-03-10.csv, col=0, header=no)
+    action=normalize
+
+! define wind shape from csv
+new loadshape.windspeed Npts= 288 mInterval= 5
+    mult = (file=windspeed_data_2020-03-10.csv, col=0, header=no)
+    action=normalize
+
+! Add a solar PV system
+New PVSystem.Solar 
+    bus1=MGSolar 
+    phases=3 
+    kV=0.03 
+    kVA=200 
+    irradiance=1
+    Pmpp=60 
+    %Cutin=0.1 
+    %Cutout=0.1 
+    daily=irrad
+    model=1
+    pf=1
+
+! Add a wind turbine
+// New Windgen.Wind
+//     bus1=MGWind
+//     phases=3
+//     kV=0.24
+//     kVA=2000
+//     model=2
+//     daily=windspeed
+New generator.wind
+    bus1=MGWind
+    phases=3
+    kV=0.24
+    kVA=200
+    model=1
+    pf=1
+    daily=windspeed
+
+
+
+// ! backup generator
+// New Generator.Diesel 
+//     bus=MGBackup 
+//     phases=3 
+//     kV=0.24 
+//     kVA=200 
+//     model=1  
+//     pf=0.8
+//     kw=150
+
+! define new line
+new line.line1 bus1=MGWind bus2=loadbus1 length=1000 phases=3
+new line.line2 bus1=MGbackup bus2=loadbus1 length=1000 phases=3
+// new line.line3 bus1=MGSolar bus2=loadbus1 length=10 phases=3
+
+
+
+
+! define new transformer
+new transformer.TR1 phases=3 windings=2
+    buses=(loadbus1 MGSolar)
+    conns='wye wye'
+    kvs="0.24 0.03"
+    kvas="100 200"
+    XHL=1
+    %Rs=[5 5]
+
+! Add a battery storage system for the solar PV
+New Storage.StorageSolar bus1=MGSolar phases=3 kv=0.03 pf=1 kWrated=30 %reserve=20
+kWhrated=500 
+
+New StorageController.StorageController1 element=transformer.TR1 terminal=1 modedis=support
+modecharge=PeakShaveLow kWtargetlow=20 elementList=[StorageSolar]
+
+! Add a battery storage system for the wind
+New Storage.StorageWind bus1=MGWind phases=3 kv=0.24 pf=1 kWrated=30 %reserve=20
+kWhrated=500 
+
+New StorageController.StorageController2 element=line.line2 terminal=1 modedis=support kwtarget=150
+modecharge=PeakShaveLow kWtargetlow=20 elementList=[StorageWind]
+
+! define monitors
+new Monitor.Solara
+    element=PVSystem.Solar
+    terminal=1
+    mode=1
+
+
+set voltagebases=(0.24 0.03)
+// Calcv
+
+set mode=daily
+// Solve
+
+    
+

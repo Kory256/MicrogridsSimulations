@@ -3,3 +3,6 @@ RenewablesIntegrationFinalProject/__pycache__/
 *.csv
 *.h5
 RenewablesIntegrationFinalProject_miniconda/pydss-projects/HELICS/
+RIFinalProjectPyDSSInterface/py_dss_interface/
+RIFinalProjectPyDSSInterface/pydssInterface/
+

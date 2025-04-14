@@ -1,0 +1,9 @@
+
+SYMMETRICAL COMPONENT VOLTAGES BY BUS (for 3-phase buses)
+
+Bus       Mag:   V1 (kV)    p.u.     V2 (kV)   %V2/V1    V0 (kV)    %V0/V1
+
+mgbackup 3.635e+144  2.624e+145  1.701e+144       46.8       inf       inf
+loadbus1       inf        inf        inf       -nan       inf      -nan
+mgsolar  4.777e+150  2.758e+152  6.285e+149      13.16       inf       inf
+mgwind         inf        inf        inf       -nan       inf      -nan

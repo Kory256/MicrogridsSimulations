@@ -1,76 +1,46 @@
-// microgrid_example/Microgrid.dss
-
-// Define buses
-// New Bus.MG1    kV=12.47  phases=3
-// New Bus.MG2    kV=0.48   phases=3
+!Base Circuit with a Single Storage
 
 Clear
 
-Set DefaultBaseFrequency=60
-
-// Define circuit
-New Circuit.Microgrid 
-    basekv=0.24
 
 
-! define new load
-new load.load1 bus1=loadbus1 phases=3 kv=0.24 kw=100 pf=0.88 model=1 class=1
+New Circuit.Source bus1=A basekv=13.8 phases=3 pu=1 Z0=[10,10] Z1=[10,10]
 
-! define load shapes from csv
-new loadshape.irrad Npts= 288 mInterval= 5
-    mult = (file=./irradiance_data_2020-03-10.csv, col=2, header=no)
-    action=normalize
-! Add a solar PV system
-New PVSystem.Solar 
-    bus1=MGSolar 
-    phases=3 
-    kV=0.03 
-    kVA=100 
-    irradiance=1005
-    Pmpp=60 
-    %Cutin=0.1 
-    %Cutout=0.1 
 
-! backup generator
-New Generator.Diesel 
-    bus=MGBackup 
-    phases=3 
-    kV=0.24 
-    kVA=200 
-    model=1  
 
-! define new line
-new line.line1 bus1=loadbus1 bus2=MGSolar linecode=336matrix length=10
-    
-// // Add a battery storage system (grid-forming inverter)
-// New Storage.Battery 
-//     bus=MG2 
-//     phases=3 
-//     kV=0.48 
-//     kWh=200 
-//     kW=100 
-//     %SOC=0.5
-// New InvControl.InvBattery DERList=(Battery) Mode=VOLTVAR
+!Inverter Efficiency Curve
 
-// // Add a microgrid controller
-// // New MicrogridController.MG_Controller 
-// //     bus=MG2 
-// //     phases=3 
-// //     kV=0.48 
-// //     kW=100 
-// //     %SOC=0.5
-// // New InvControl.InvController DERList=(controller) Mode=VOLTWATT
+New XYCurve.Eff npts=4 xarray=[.1        .2        .4        1.0] yarray=[.86        .9        .93        .97]
 
-// // Add a wind turbine (grid-following inverter)
-// New Generator.Wind 
-//     bus=MG2 
-//     phases=3 
-//     kV=0.48 
-//     kVA=50 
-// // grid following inverter for wind system
-// New InvControl.InvWind
-//     DERList=(Wind)  
-//     Mode=VOLTWATT   // Grid-following control mode
 
-// Add a backup diesel generator (synchronous machine)
+
+New Storage.A phases=3 bus1=A kv=13.8
+
+~ %charge=100 %discharge=100 %reserve=20
+
+~ %effcharge=90 %effdischarge=90
+
+~ %idlingkW=2
+
+~ kWhrated=10000 %stored=80 state=idling
+
+~ dispmode=default model=1 kVA=1000 kWrated=900 kvarMax=800 %kWRated=100
+
+~ EffCurve=Eff %cutin=5 %cutout=5 varfollowinverter=false wattpriority=True
+
+~ %PminkvarMax=20 %PminNoVars=10
+
+~ vminpu=0.8 vmaxpu=1.2
+
+
+
+New Monitor.MonStorageAState element=Storage.A mode=3
+
+New Monitor.MonStorageAV element=Storage.A mode=0
+
+
+
+Set voltagebases=[13.8]
+
+Calcvoltagebases 
 
